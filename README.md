@@ -1,4 +1,4 @@
-# Chat en Ruby
+# Chat en Python
 
 * **Miguel Torres Eric Giovanni**
 * **Universidad Nacional Autónoma de México**
