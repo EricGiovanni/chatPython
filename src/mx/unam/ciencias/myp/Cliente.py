@@ -12,7 +12,7 @@ class Cliente:
         try:
             self.sock.connect(userAddress)
         except:
-            print("Error de conección")
+            print("Error de conexión")
             sys.exit()
 
         msgRecv = threading.Thread(target=self.msgRecv)

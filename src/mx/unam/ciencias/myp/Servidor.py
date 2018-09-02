@@ -20,7 +20,7 @@ class Servidor:
         process.start()
 
     def acceptConnection(self):
-        print("Aceptando conección")
+        print("Esperando conexiones...")
         while True:
             try:
                 conn, addr = self.serverSocket.accept()
@@ -31,7 +31,7 @@ class Servidor:
                 pass
         
     def processConnection(self):
-        print("Procesando conección")
+        print("Procesando conexión")
         while True:
             if len(self.clientes) > 0:
                 for c in self.clientes:
