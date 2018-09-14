@@ -8,6 +8,13 @@ class Cliente:
     def __init__(self, host, port):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.userAddress = (str(host), int(port))
+        self.estado = "ACTIVE"
+
+    def setEstado(self, estado):
+        self.estado = estado
+
+    def getEstado(self):
+        return self.estado
 
     def cerrarSocket(self):
         self.sock.close()
@@ -50,7 +57,10 @@ class Cliente:
             try:
                 data = self.sock.recv(1024)
                 if data:
-                    print(pickle.loads(data))
+                    if(pickle.loads(data) == "Hola"):
+                        print(data)
+                    else:
+                        print(pickle.loads(data))
             except:
                 pass
     

@@ -27,12 +27,24 @@ class TestCliente(unittest.TestCase):
         self.sock.close()
         self.cliente.cerrarSocket()
 
-    def testGetSock(self):
+    def testGetEstado(self):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.cliente = Cliente.Cliente("localhost", 4)
         self.cliente.setSock(self.sock)
         self.assertEqual(self.sock, self.cliente.getSock())
         self.sock.close()
+        self.cliente.cerrarSocket()
+
+    def testSetEstado(self):
+        self.cliente = Cliente.Cliente("localhost", 5)
+        self.cliente.setEstado("AWAY")
+        self.assertEqual("AWAY", self.cliente.getEstado())
+        self.cliente.cerrarSocket()
+
+    def testGetSock(self):
+        self.cliente = Cliente.Cliente("localhost", 6)
+        self.cliente.setEstado("BUSY")
+        self.assertEqual("BUSY", self.cliente.getEstado())
         self.cliente.cerrarSocket()
     
 if __name__ == "__main__":
