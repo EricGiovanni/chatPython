@@ -4,6 +4,7 @@ import sys
 import pickle
 
 class Cliente:
+    
     def __init__(self, host, port):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.userAddress = (str(host), int(port))
@@ -23,6 +24,38 @@ class Cliente:
     
     def setUserAddress(self, userAddress):
         self.userAddress = userAddress
+
+    
+    def initCliente(self):
+        self.sock.connect(self.userAddress)
+        self.initDaemon()
+        self.recibirMensaje()
+
+    def initDaemon(self):
+        msgRecv = threading.Thread(target=self.msgRecv)
+        msgRecv.daemon = True
+        msgRecv.start()
+
+    def recibirMensaje(self):
+        while True:
+            msg = input()
+            if msg != "QUIT":
+                self.sendMsg(msg)
+            else:
+                self.sock.close()
+                sys.exit()
+
+    def msgRecv(self):
+        while True:
+            try:
+                data = self.sock.recv(1024)
+                if data:
+                    print(pickle.loads(data))
+            except:
+                pass
+    
+    def sendMsg(self, msg):
+        self.sock.send(pickle.dumps(msg))
 
 if __name__ == "__main__":
     try:
