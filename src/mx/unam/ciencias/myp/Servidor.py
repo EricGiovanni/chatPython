@@ -9,6 +9,12 @@ class Servidor:
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server = (str(host), int(port))
 
+    def setServer(self, server):
+        self.server = server
+
+    def getServer(self):
+        return self.server
+
     def cerrarSocket(self):
         self.sock.close()
 
