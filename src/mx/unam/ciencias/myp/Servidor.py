@@ -7,10 +7,7 @@ class Servidor:
     def __init__(self, host, port):
         self.clientes = []
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server = (str(host), int(port))
-        self.sock.bind(server)
-        self.sock.listen()
-        self.sock.setblocking(False)
+        self.server = (str(host), int(port))
 
     def cerrarSocket(self):
         self.sock.close()
@@ -23,6 +20,9 @@ class Servidor:
         self.sock = sock
 
     def initServer(self):
+        self.sock.bind(self.server)
+        self.sock.listen()
+        self.sock.setblocking(False)
         self.initDaemon()
         self.recibirMensaje()
 
@@ -77,5 +77,6 @@ class Servidor:
 if __name__ == "__main__":
     try:
         s = Servidor(str(sys.argv[1]), int(sys.argv[2]))
+        s.initServer()
     except:
         print("use: python3 servidor.py host port")
