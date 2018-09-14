@@ -57,7 +57,7 @@ class Servidor:
             except:
                 self.clientes.remove(c)
 
-    def msgPrivate(self, msg, cliente):
+    def privateMsg(self, msg, cliente):
         for c in self.clientes:
             try:
                 if c in cliente:
