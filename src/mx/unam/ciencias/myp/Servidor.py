@@ -56,6 +56,14 @@ class Servidor:
                     c.send(msg)
             except:
                 self.clientes.remove(c)
+
+    def msgPrivate(self, msg, cliente):
+        for c in self.clientes:
+            try:
+                if c in cliente:
+                    c.send(msg)
+            except:
+                self.clientes.remove(c)
     
     def aceptarConexion(self):
         print("Esperando conexiones...")
