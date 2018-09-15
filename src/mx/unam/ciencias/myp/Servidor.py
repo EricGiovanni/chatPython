@@ -100,7 +100,13 @@ class Servidor:
                     try:
                         data = c[0].recv(1024)
                         if data:
-                            self.msgToAll(data,c[0])
+                            if(pickle.loads(data) == "DISCONNECT"):
+                                msg = "Se ha desconectado " + str(c[1])
+                                msgBytes = pickle.dumps(msg)
+                                print(msgBytes)
+                                self.msgToAll(msgBytes, c[0])
+                            else:
+                                self.msgToAll(data,c[0])
                     except:
                         pass
 

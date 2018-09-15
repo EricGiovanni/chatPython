@@ -46,9 +46,10 @@ class Cliente:
     def esperarMensaje(self):
         while True:
             msg = input()
-            if msg != "QUIT":
+            if msg != "DISCONNECT":
                 self.sendMsg(msg)
             else:
+                self.sendMsg("DISCONNECT")
                 self.sock.close()
                 sys.exit()
 
