@@ -36,14 +36,14 @@ class Cliente:
     def initCliente(self):
         self.sock.connect(self.userAddress)
         self.initDaemon()
-        self.recibirMensaje()
+        self.esperarMensaje()
 
     def initDaemon(self):
         msgRecv = threading.Thread(target=self.msgRecv)
         msgRecv.daemon = True
         msgRecv.start()
 
-    def recibirMensaje(self):
+    def esperarMensaje(self):
         while True:
             msg = input()
             if msg != "QUIT":
