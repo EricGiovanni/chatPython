@@ -8,6 +8,20 @@ class Servidor:
         self.clientes = []
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server = (str(host), int(port))
+        self.numUser = 0
+        self.id = 0
+
+    def aumentaID(self):
+        self.id = self.id + 1
+
+    def aumentaNumUser(self):
+        self.numUser = self.numUser + 1
+
+    def getID(self):
+        return self.id
+    
+    def getNumUser(self):
+        return self.numUser
 
     def setServer(self, server):
         self.server = server
@@ -52,16 +66,16 @@ class Servidor:
     def msgToAll(self, msg, cliente):
         for c in self.clientes:
             try:
-                if c != cliente:
-                    c.send(msg)
+                if c[0] != cliente:
+                    c[0].send(msg)
             except:
                 self.clientes.remove(c)
 
     def privateMsg(self, msg, cliente):
         for c in self.clientes:
             try:
-                if c in cliente:
-                    c.send(msg)
+                if c[0] in cliente:
+                    c[0].send(msg)
             except:
                 self.clientes.remove(c)
     
@@ -72,7 +86,9 @@ class Servidor:
                 conn, addr = self.sock.accept()
                 conn.setblocking(False)
                 print(addr)
-                self.clientes.append(conn)
+                self.clientes.append((conn, self.numUser, self.id))
+                self.aumentaNumUser()
+                self.aumentaID()
             except:
                 pass
 
@@ -82,9 +98,9 @@ class Servidor:
             if len(self.clientes) > 0:
                 for c in self.clientes:
                     try:
-                        data = c.recv(1024)
+                        data = c[0].recv(1024)
                         if data:
-                            self.msgToAll(data,c)
+                            self.msgToAll(data,c[0])
                     except:
                         pass
 

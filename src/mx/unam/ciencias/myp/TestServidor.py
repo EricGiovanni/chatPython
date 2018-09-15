@@ -41,5 +41,33 @@ class TestServidor(unittest.TestCase):
         self.sock.close()
         self.servidor.cerrarSocket()
 
+    def testAumentaID(self):
+        self.servidor = Servidor.Servidor("localhost", 5)
+        self.assertEqual(0, self.servidor.getID())
+        self.servidor.aumentaID()
+        self.assertEqual(1, self.servidor.getID())
+        self.servidor.cerrarSocket()
+    
+    def testAumentaNumUser(self):
+        self.servidor = Servidor.Servidor("localhost", 6)
+        self.assertEqual(0, self.servidor.getNumUser())
+        self.servidor.aumentaNumUser()
+        self.assertEqual(1, self.servidor.getNumUser())
+        self.servidor.cerrarSocket()
+
+    def testGetID(self):
+        self.servidor = Servidor.Servidor("localhost", 7)
+        self.assertEqual(0, self.servidor.getID())
+        self.servidor.aumentaID()
+        self.assertEqual(1, self.servidor.getID())
+        self.servidor.cerrarSocket()
+
+    def testGetNumUser(self):
+        self.servidor = Servidor.Servidor("localhost", 8)
+        self.assertEqual(0, self.servidor.getNumUser())
+        self.servidor.aumentaNumUser()
+        self.assertEqual(1, self.servidor.getNumUser())
+        self.servidor.cerrarSocket()
+
 if __name__ == "__main__":
     unittest.main()

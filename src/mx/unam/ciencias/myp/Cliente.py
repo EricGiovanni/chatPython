@@ -57,10 +57,7 @@ class Cliente:
             try:
                 data = self.sock.recv(1024)
                 if data:
-                    if(pickle.loads(data) == "Hola"):
-                        print(data)
-                    else:
-                        print(pickle.loads(data))
+                    print(pickle.loads(data))
             except:
                 pass
     
