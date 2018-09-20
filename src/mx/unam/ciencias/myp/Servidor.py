@@ -6,6 +6,12 @@ import Room
 
 class Servidor:
     def __init__(self, host, port):
+        """
+        Constructor que inicializa una lista de rooms, 
+        una lista de clientes, el socket , el numero de 
+        usuario y el numero ID que identificara a cada
+        usuario
+        """
         self.clientes = []
         self.rooms = []
         self.principal = Room.Room(self.clientes, "Principal")
@@ -16,37 +22,70 @@ class Servidor:
         self.numUser = "User" + str(self.id)
 
     def aumentaID(self):
+        """
+        Metodo que aumenta el valor del ID para el siguiente usuario
+        """
         self.id = self.id + 1
 
     def aumentaNumUser(self):
+        """
+        Metodo que cambia el nombre de usuario de acuerdo al ID
+        """
         self.numUser = "User" + str(self.id)
 
     def setNumUser(self, numUser):
+        """
+        Metodo que te permite cambiar el nombre de usuario
+        """
         self.numUser = numUser
 
     def getID(self):
+        """
+        Metodo que te permite obtener el ID
+        """
         return self.id
     
     def getNumUser(self):
+        """
+        Metodo que te permite obtener el nombre de usuario
+        """
         return self.numUser
 
     def setServer(self, server):
+        """
+        Metodo que te permite cambiar la tupla host y port
+        """
         self.server = server
 
     def getServer(self):
+        """
+        Metodo que te permite obtener la tupla host y port
+        """
         return self.server
 
     def cerrarSocket(self):
+        """
+        Metodo que cierra el socket del servidor
+        """
         self.sock.close()
 
     def getSock(self):
+        """
+        Metodo que obtiene el socket del servidor
+        """
         return self.sock
 
     def setSock(self, sock):
+        """
+        Metodo que te permite cambiar el socket del servidor
+        """
         self.sock.close()
         self.sock = sock
 
     def initServer(self):
+        """
+        Metodo que incia el proceso del servidor
+        """
         self.sock.bind(self.server)
         self.sock.listen()
         self.sock.setblocking(False)
@@ -54,6 +93,9 @@ class Servidor:
         self.recibirMensaje()
 
     def recibirMensaje(self):
+        """
+        Metodo que espera mensajes de la entrada del servidor
+        """
         while True:
             msg = input()
             if msg == "QUIT":
@@ -63,6 +105,10 @@ class Servidor:
                 pass
 
     def initDaemon(self):
+        """
+        Metodo que inicia Daemons para aceptar conexiones y esperar 
+        mensajes de usuarios
+        """
         aceptar = threading.Thread(target=self.aceptarConexion)
         procesar = threading.Thread(target=self.esperarMensaje)
         aceptar.daemon = True
@@ -74,6 +120,9 @@ class Servidor:
         #if
 
     def msgToAll(self, msg, cliente):
+        """
+        Metodo que envia mensajes a todos los clientes
+        """
         for c in self.clientes:
             try:
                 if c[0] != cliente:
@@ -82,6 +131,9 @@ class Servidor:
                 self.clientes.remove(c)
 
     def privateMsg(self, msg, cliente):
+        """
+        Metodo que envia mensaje privado a un cliente
+        """
         for c in self.clientes:
             try:
                 if c[0] == cliente:
@@ -90,11 +142,17 @@ class Servidor:
                 self.clientes.remove(c)
     
     def groupMsg(self, nombre, msg, cliente):
+        """
+        Metodo que envia mensajes a clientes de un room
+        """
         for r in self.rooms:
             if r.getNombre() == nombre:
                 r.enviarMsg(msg, cliente)
     
     def aceptarConexion(self):
+        """
+        Metodo que acepta conexiones de nuevos clientes
+        """
         print("Esperando conexiones...")
         while True:
             try:
@@ -111,6 +169,9 @@ class Servidor:
                 pass
 
     def esperarMensaje(self):
+        """
+        Metodo que espera mensajes de los clientes conectados
+        """
         print("Esperando Mensajes...")
         while True:
             if len(self.clientes) > 0:
@@ -153,4 +214,4 @@ if __name__ == "__main__":
         s = Servidor("0.0.0.0", int(sys.argv[1]))
         s.initServer()
     except:
-        print("use: python3 servidor.py host port")
+        print("use: python3 servidor.py port")
