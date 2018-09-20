@@ -9,7 +9,7 @@ _Se realizará un chat en python, en el cual crearemos un servidor y un cliente 
 
 ### Pre-requisitos 
 
-_Ocuparemos Python 3.7.0 (default, Jul 15 2018, 10:44:58) [GCC 8.1.1 20180531], unitTest, para ejecutar el chat se deberá hacer lo siguiente, entrar a la carpeta Chat y ejecutar el comando_
+_Ocuparemos Python 3.7.0 (default, Jul 15 2018, 10:44:58) [GCC 8.1.1 20180531], gtk, unitTest, para ejecutar el chat se deberá hacer lo siguiente, entrar a la carpeta Chat y ejecutar el comando_
 
 ```
 ./server.sh
