@@ -4,10 +4,15 @@ import sys
 import pickle
 
 class Room:
+    """
+    Constructor que inicializa la lista de clientes que 
+    contendrá el room y el nombre de dicho room
+    """
     def __init__(self, clientes, nombre):
         self.clientes = clientes
         self.nombre = nombre
 
+    
     def setNombre(self, nombre):
         self.nombre = nombre
 
