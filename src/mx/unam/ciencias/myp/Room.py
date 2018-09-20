@@ -14,6 +14,12 @@ class Room:
     def getNombre(self):
         return self.nombre
 
+    def setClientes(self, clientes):
+        self.clientes = clientes
+    
+    def getClientes(self):
+        return self.clientes
+
     def enviarMsg(self, msg, cliente):
         for c in self.clientes:
             try:
