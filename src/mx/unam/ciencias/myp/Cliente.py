@@ -46,7 +46,19 @@ class Cliente:
     def esperarMensaje(self):
         while True:
             msg = input()
-            if msg != "DISCONNECT":
+            if msg.find("STATUS", 0, 6) != -1:
+                if msg.find("AWAY", 7, 11) != -1:
+                    self.sendMsg(msg)
+                    self.setEstado("AWAY")
+                elif msg.find("BUSY", 7, 11) != -1:
+                    self.sendMsg(msg)
+                    self.setEstado("BUSY")
+                elif msg.find("ACTIVE", 7, 13) != -1:
+                    self.sendMsg(msg)
+                    self.setEstado("ACTIVE")
+                else:
+                    self.sendMsg(msg)
+            elif msg != "DISCONNECT":
                 self.sendMsg(msg)
             else:
                 self.sendMsg("DISCONNECT")
