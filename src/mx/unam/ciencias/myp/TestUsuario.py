@@ -5,7 +5,7 @@ import socket
 import sys
 import Usuario
 
-class TestCliente(unittest.TestCase):
+class TestUsuario(unittest.TestCase):
 
     def testGetConn(self):
         """
@@ -62,4 +62,4 @@ class TestCliente(unittest.TestCase):
         self.assertEqual(6, self.u.getNumId())
     
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(argv = ["ignored", "-v"], exit = False)

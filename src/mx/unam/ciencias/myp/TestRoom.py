@@ -5,7 +5,7 @@ import socket
 import sys
 import Room
 
-class TestCliente(unittest.TestCase):
+class TestRoom(unittest.TestCase):
 
     def testSetNombre(self):
         """
@@ -46,4 +46,4 @@ class TestCliente(unittest.TestCase):
         self.assertEqual(self.lista, self.r.getClientes())
     
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(argv = ["ignored", "-v"], exit = False)

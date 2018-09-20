@@ -107,4 +107,4 @@ class TestServidor(unittest.TestCase):
         self.servidor.cerrarSocket()
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(argv = ["ignored", "-v"], exit = False)

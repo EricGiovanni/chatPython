@@ -67,4 +67,4 @@ class TestCliente(unittest.TestCase):
         self.cliente.cerrarSocket()
     
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(argv = ["ignored", "-v"], exit = False)
